@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Net;
 using Akka.Actor;
 using Octokit;
 using Label = System.Windows.Forms.Label;
@@ -43,6 +44,7 @@ namespace GithubActors.Actors
             {
                 //need a client to test our credentials with
                 var client = GithubClientFactory.GetUnauthenticatedClient();
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 GithubClientFactory.OAuthToken = auth.OAuthToken;
                 client.Credentials = new Credentials(auth.OAuthToken);
                 BecomeAuthenticating();
